@@ -28,7 +28,6 @@ const registro = {
     email: "",
     encryptedPassword: ""
 }
-const router = useRouter();
 const logIn = async()=>{
     try {
         const response:any = await $fetch("http://localhost:3000/auth/login", {method:"POST", body: registro});
