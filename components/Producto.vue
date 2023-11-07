@@ -6,13 +6,13 @@
                 <Icon icon="material-symbols:add-shopping-cart-outline-rounded" class="h-8 w-8"/>
             </button>
         </div>
-        <div class="h-1/4 w-full border-t-2 border-negro flex items-center justify-center">
+        <div class="h-1/4 w-full border-t-2 border-negro flex items-center justify-center overflow-auto">
             <div class="w-1/4 flex items-center justify-center">
                 <Icon icon="ph:heart-straight-light" class="w-8 h-8 hover:text-rojo"/>
             </div>
             <div class="flex flex-col w-3/4 items-center justify-center">
-                <h2 class="text-lg font-letra font-thin tracking-widest text-negro">{{ props.producto.name }}</h2>
-                <h1 class="text-xl font-letra font-thin tracking-wide text-negro">${{ props.producto.price }} COP</h1>
+                <h2 class="text-lg font-letra font-thin tracking-widest text-negro text-center">{{ props.producto.name }}</h2>
+                <h1 class="text-base font-letra font-thin tracking-wide text-negro">${{ props.producto.price }} COP</h1>
             </div>
         </div>
         

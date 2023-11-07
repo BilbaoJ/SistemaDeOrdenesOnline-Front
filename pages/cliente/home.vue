@@ -17,6 +17,10 @@ import type Product from "~/model/Product";
 const layout = "header-cliente";
 const router = useRouter();
 
+onBeforeMount(async () => {
+    await consultarProductos();
+});
+
 const consultarProductos = async()=>{
     try {
         const token:any = localStorage.getItem("token");
@@ -48,7 +52,7 @@ const consultarProductos = async()=>{
                     title:'Error',
                     text: error.data.message,
                     icon: 'error',
-                    timer: 1000,
+                    timer: 2000,
                     showConfirmButton: false
                     });
                 router.push({path:"/"});
@@ -101,8 +105,4 @@ const consultarProductos = async()=>{
         } 
     }
 }
-
-onMounted(async () => {
-    await consultarProductos();
-});
 </script>
