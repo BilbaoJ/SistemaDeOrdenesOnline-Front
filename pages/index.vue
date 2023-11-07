@@ -21,6 +21,9 @@
     </div>
 </template>
 <script setup lang="ts">
+import { ResponseTypes } from "../model/enums/ResponseTypes.enum";
+import swal from 'sweetalert2';
+
 const registro = {
     email: "",
     encryptedPassword: ""
