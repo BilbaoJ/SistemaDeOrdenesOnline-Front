@@ -9,7 +9,17 @@ export default {
     "./error.vue",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors:{
+        "rojo" : "#EF2E2E",
+        "negro" : "#292F36",
+        "gris" : "#D8D8D8",
+        "blanco" : "#F6F4F3"
+      },
+      fontFamily: {
+        'letra': ['Montserrat', 'sans-serif'],
+      }
+    },
   },
   plugins: [],
 }
