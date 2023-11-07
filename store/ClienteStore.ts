@@ -18,7 +18,13 @@ const clienteStore = reactive({
     limpiar(){
         this.productos_carrito = [];
         this.total_compra = 0;
-    }
+    },
+    validarToken(router:any){
+        const token = localStorage.getItem('token');
+        if(token === null) {
+          router.push({path:"/"});
+        }
+    },
 });
 
 export default clienteStore;

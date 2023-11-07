@@ -18,6 +18,7 @@ const layout = "header-cliente";
 const router = useRouter();
 
 onBeforeMount(async () => {
+    ClienteStore.validarToken(router);
     await consultarProductos();
 });
 
