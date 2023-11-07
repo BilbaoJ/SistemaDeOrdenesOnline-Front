@@ -15,6 +15,9 @@ const clienteStore = reactive({
         var precios: number[] = this.productos_carrito.map(item_agregado => item_agregado.price);
         this.total_compra = precios.reduce((suma, precio)=> suma + precio, 0);
     },
+    eliminarProductoCarrito(payload: Product){
+        this.productos_carrito = this.productos_carrito.filter(producto => producto !== payload);
+    },
     limpiar(){
         this.productos_carrito = [];
         this.total_compra = 0;

@@ -1,6 +1,6 @@
 <template>
     <header class="bg-negro h-14 flex items-center justify-between p-2 sticky top-0 z-10">
-        <div class="static">
+        <div class="static flex space-x-4 items-center">
             <button @click="abrirMenu()" class="rounded-full bg-blanco h-fit w-fit p-1 ml-5">
                 <Icon icon="lucide:user" class="w-8 h-8"/>
             </button>
@@ -13,6 +13,7 @@
                     <p class="text-blanco font-letra tracking-wide text-center hover:text-negro">Cerrar sesión</p>
                 </button>
             </div>
+            <h1 class="text-letra text-xl text-blanco">¡Hola, {{ name }}!</h1>
         </div>
 
         <div class="flex items-center">
@@ -29,6 +30,7 @@
 import { Icon } from '@iconify/vue';
 import ClienteStore  from "../store/ClienteStore";
 const mostrarMenu = ref(false);
+const name = ref();
 const router = useRouter();
 const abrirMenu = () => {
     mostrarMenu.value = !mostrarMenu.value;
@@ -42,5 +44,9 @@ const cerrarSesion = () =>{
 const volverInicio = ()=>{
     router.push({path: "/cliente/home"});
 }
+
+onBeforeMount( () => {
+    name.value = localStorage.getItem("userName");
+});
 
 </script>
