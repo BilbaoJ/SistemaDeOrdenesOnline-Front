@@ -11,6 +11,10 @@ const clienteStore = reactive({
     actualizarProductos(payload: Product[]){
         this.productos = payload;
     },
+    calcularPrecioCarrito(){
+        var precios: number[] = this.productos_carrito.map(item_agregado => item_agregado.price);
+        this.total_compra = precios.reduce((suma, precio)=> suma + precio, 0);
+    },
 });
 
 export default clienteStore;

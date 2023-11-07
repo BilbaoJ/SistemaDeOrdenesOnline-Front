@@ -28,5 +28,6 @@ const props = defineProps({
 
 const agregarACarrito = () => {
     ClientStore.agregarProductoCarrito(props.producto as Product);
+    ClientStore.calcularPrecioCarrito();
 }
 </script>

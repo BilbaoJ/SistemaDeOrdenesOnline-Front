@@ -1,5 +1,5 @@
 <template>
-    <header class="bg-negro h-14 flex items-center justify-between p-2">
+    <header class="bg-negro h-14 flex items-center justify-between p-2 sticky top-0 z-10">
         <div class="static">
             <button @click="abrirMenu()" class="rounded-full bg-blanco h-fit w-fit p-1 ml-5">
                 <Icon icon="lucide:user" class="w-8 h-8"/>
@@ -16,7 +16,7 @@
         </div>
 
         <div class="flex items-center">
-            <NuxtLink href="/" class="relative">
+            <NuxtLink href="/cliente/carrito" class="relative">
                 <Icon icon="humbleicons:cart" class="h-12 w-12 text-blanco"/>
                 <div class="rounded-full bg-rojo absolute top-0 right-0 w-5 h-5 flex items-center justify-center text-blanco">{{ ClienteStore.productos_carrito.length }}</div>
             </NuxtLink>
