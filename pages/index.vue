@@ -40,10 +40,12 @@ const logIn = async()=>{
                         timer: 1000,
                         showConfirmButton: false
                         });
-                    const token = response.userConToken.token;
-                    const rol = response.userConToken.user.rol;
+                    const token:string = response.userConToken.token;
+                    const rol:string = response.userConToken.user.rol;
+                    const userName:string = response.userConToken.user.email.split("@")[0];
                     localStorage.setItem('token', token);
                     localStorage.setItem('rol', rol);
+                    localStorage.setItem('userName', userName);
                     if (rol === "administrador") {
                         await navigateTo({ path: "/admin/home" });
                     } else {
