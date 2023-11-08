@@ -6,4 +6,14 @@
 
 <script>
 import TableAdmin from '~/components/TableAdmin.vue';
+
+onBeforeMount(() => {
+    verifyRol()
+})
+const verifyRol = () => {
+    const rol = localStorage.getItem('rol');
+    if(rol !== "administrador"){
+        navigateTo({path: "/"})
+    }
+}
 </script>
