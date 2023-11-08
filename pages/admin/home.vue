@@ -16,8 +16,16 @@ import clienteStore from '~/store/ClienteStore';
 const router =  useRouter()
 
 onBeforeMount(() => {
+    verifyRol()
     clienteStore.validarToken(router);
 })
+
+const verifyRol = () => {
+    const rol = localStorage.getItem('rol');
+    if(rol !== "administrador"){
+        navigateTo({path: "/"})
+    }
+}
 
 const goToProductsAdmin = async () => {
     await navigateTo({path: "/admin/products"})

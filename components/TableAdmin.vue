@@ -31,6 +31,7 @@ let items: any = ref([]);
 let titles: Ref<string[]> = ref([""]);
 
 onBeforeMount(async () => {
+    verifyRol()
     let token:any = localStorage.getItem('token')
     let response: any = await $fetch(`http://localhost:3000/${props.ruta}`, {method: "GET", headers: {token}})
     if(!verifyOrder(props.ruta, response)){
@@ -38,6 +39,13 @@ onBeforeMount(async () => {
         titles.value = Object.keys(items.value[0]);
     }
 })
+
+const verifyRol = () => {
+    const rol = localStorage.getItem('rol');
+    if(rol !== "administrador"){
+        navigateTo({path: "/"})
+    }
+}
 
 const verifyOrder = (ruta: string, response: any) => {
     if(ruta === "orders"){
