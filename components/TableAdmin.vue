@@ -14,14 +14,16 @@
             </tr>
         </tbody>
     </table>
-    <div class="relative top-28 flex items-center">
+    <div class="relative top-28 flex items-center hover:bg-rojo w-fit p-1 rounded-lg hover:text-blanco">
         <Icon icon="material-symbols:arrow-back-ios-rounded"/>
-        <button @click="goBack()">atras</button>
+        <button @click="goBack()">Atras</button>
     </div>
 </template>
 
 <script setup lang="ts">
 import { Icon } from '@iconify/vue';
+import swal from 'sweetalert2';
+import { ResponseTypes } from '~/model/enums/ResponseTypes.enum';
 
 const props = defineProps({
   ruta: { type: String, required: true }
@@ -29,21 +31,86 @@ const props = defineProps({
 
 let items: any = ref([]);
 let titles: Ref<string[]> = ref([""]);
+const router = useRouter();
 
 onBeforeMount(async () => {
-    verifyRol()
-    let token:any = localStorage.getItem('token')
-    let response: any = await $fetch(`http://localhost:3000/${props.ruta}`, {method: "GET", headers: {token}})
-    if(!verifyOrder(props.ruta, response)){
-        items.value = response.data
-        titles.value = Object.keys(items.value[0]);
-    }
+    await verifyRol()
+    await obetener();
 })
 
-const verifyRol = () => {
+const obetener = async() =>{
+    try {
+        let token:any = localStorage.getItem('token')
+        let response: any = await $fetch(`http://localhost:3000/${props.ruta}`, {method: "GET", headers: {token}})
+        if(!verifyOrder(props.ruta, response)){
+            items.value = response.data
+            titles.value = Object.keys(items.value[0]);
+        }
+    } catch (error:any) {
+        switch (error.statusCode) {
+            case ResponseTypes.FORBIDDEN:{
+                await swal.fire({
+                    title:'Error',
+                    text: error.data.message,
+                    icon: 'error',
+                    timer: 2000,
+                    showConfirmButton: false
+                    });
+                localStorage.clear();
+                router.push({path:"/"});
+                break;
+            }
+
+            case ResponseTypes.NOT_FOUND: {
+                await swal.fire({
+                    title:'Error',
+                    text: error.data.message,
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                break;
+            }
+
+            case ResponseTypes.INTERNAL_SERVER_ERROR: {
+                await swal.fire({
+                    title: 'Error',
+                    text: error.data.message,
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                break;
+            }
+
+            case ResponseTypes.UNAUTHORIZED: {
+                await swal.fire({
+                    title: 'Error',
+                    text: error.data.message,
+                    icon: 'error',
+                    timer: 1000,
+                    showConfirmButton: false
+                });
+                break;
+            }
+
+          default:
+            await swal.fire({
+              title:'Ocurrió un error inesperado',
+              text:error,
+              icon: 'error',
+              timer: 1000,
+              showConfirmButton: false
+            });
+            break;
+        } 
+    }
+}
+
+const verifyRol = async () => {
     const rol = localStorage.getItem('rol');
     if(rol !== "administrador"){
-        navigateTo({path: "/"})
+        await navigateTo({path: "/"})
     }
 }
 

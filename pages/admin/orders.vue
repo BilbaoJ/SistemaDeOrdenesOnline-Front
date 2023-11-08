@@ -1,11 +1,15 @@
 <template>
-    <div class="w-screen h-screen grid content-center px-32">
-        <TableAdmin :ruta = "'orders'"/>
-    </div>
+    <NuxtLayout :name="layout">
+        <div class="w-screen h-screen grid content-center px-32">
+            <TableAdmin :ruta = "'orders'"/>
+        </div>
+    </NuxtLayout>
 </template>
 
-<script>
+<script setup lang="ts">
 import TableAdmin from '~/components/TableAdmin.vue';
+
+const layout = "header-admin";
 
 onBeforeMount(() => {
     verifyRol()
