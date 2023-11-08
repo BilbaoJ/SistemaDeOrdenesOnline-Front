@@ -1,6 +1,6 @@
 <template>
     <div class="w-screen h-screen grid content-center px-32">
-        <TableAdmin :ruta = "'products'"/>
+        <TableAdmin :ruta = "'orders'"/>
     </div>
 </template>
 
