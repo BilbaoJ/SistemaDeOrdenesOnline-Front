@@ -1,6 +1,6 @@
 import type Product from "./Product";
 
-export interface Order{
+export default interface Order{
     product: Product[],
     totalPrice: number
 }

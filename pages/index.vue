@@ -31,7 +31,7 @@ const registro = {
 const logIn = async()=>{
     try {
         const response:any = await $fetch("http://localhost:3000/auth/login", {method:"POST", body: registro});
-        if (response) {
+        if (response) {        
             switch (response.status) {
                 case ResponseTypes.ACCEPTED:{
                     await swal.fire({
